@@ -1,0 +1,1 @@
+# Script pour exporter les données SQLite
