@@ -14,6 +14,15 @@ def add_user(pseudo, email, password, is_coach):
     conn.commit()
     conn.close()
 
+#Récuperer l'utilisateur par email
+def get_user_by_email(email):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM user WHERE email= ?;", (email))
+    user= cursor.fetchone()
+    conn.close()
+    return user
+
 # Récuperer un utilisateur par email
 def add_caracteristic(gender, age, weight, height, id_user):
     conn = get_connection()
