@@ -1,9 +1,9 @@
 # Connexion à SQLite et création des tables
 import sqlite3
-
+from app.config import DATABASE_URL
 # Connexion à la base de données SQLite
 def get_connection():
-    conn = sqlite3.connect("cycling.db")
+    conn = sqlite3.connect(DATABASE_URL)
     conn.row_factory = sqlite3.Row  # Permet d'accéder aux colonnes par leur nom
     return conn
 
@@ -35,9 +35,9 @@ def create_tables():
             FOREIGN KEY(id_user) REFERENCES user(id));
     """)
 
-    #Table des perfomances(test)
+    #Table des perfomances
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS test (
+        CREATE TABLE IF NOT EXISTS performance (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
             power_max REAL,
             hr_max REAL,
@@ -51,7 +51,7 @@ def create_tables():
             FOREIGN KEY(test_type_id) REFERENCES test_type(id));
     """)
 
-    #Table des test_type
+    #Table des types_tests
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS test_type (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,

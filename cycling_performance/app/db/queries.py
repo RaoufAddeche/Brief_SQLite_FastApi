@@ -18,7 +18,7 @@ def add_user(pseudo, email, password, is_coach):
 def get_user_by_email(email):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM user WHERE email= ?;", (email))
+    cursor.execute("SELECT * FROM user WHERE email= ?;", (email,))
     user= cursor.fetchone()
     conn.close()
     return user
@@ -45,26 +45,26 @@ def add_test_type(name_type):
     conn.commit()
     conn.close()
 
-#Ajouter un test
-def add_test(power_max, hr_max, vo2_max, rf_max, cadence_max, athlete_id, test_type_id):
+#Ajouter une performance
+def add_performance(power_max, hr_max, vo2_max, rf_max, cadence_max, athlete_id, test_type_id):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        """INSERT INTO test (power_max, hr_max, vo2_max, rf_max, cadence_max, athlete_id, test_type_id)
+        """INSERT INTO performance (power_max, hr_max, vo2_max, rf_max, cadence_max, athlete_id, test_type_id)
         VALUES (?, ?, ?, ?, ?, ?, ?);""",
         (power_max, hr_max, vo2_max, rf_max, cadence_max, athlete_id, test_type_id)
     )
     conn.commit()
     conn.close()
 
-# Récupérer les tests d'un athlète
-def get_tests_by_athlete(athlete_id):
+# Récupérer les performances d'un athlète
+def get_performances_by_athlete(athlete_id):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM test WHERE athlete_id = ?;", (athlete_id,))
-    tests = cursor.fetchall()
+    cursor.execute("SELECT * FROM performance WHERE athlete_id = ?;", (athlete_id,))
+    performances = cursor.fetchall()
     conn.close()
-    return tests
+    return performances
 
 # Récupérer les types de tests
 def get_test_types():
