@@ -74,3 +74,4 @@ def get_test_types():
     test_types = cursor.fetchall()
     conn.close()
     return test_types
+
